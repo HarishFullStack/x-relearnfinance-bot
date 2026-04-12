@@ -2,12 +2,12 @@ name: X Finance Bot
 
 on:
   schedule:
-    # Post 1 — 8:00 AM EST (pre-written finance insight)
-    - cron: "0 13 * * *"
-    # Post 2 — 12:00 PM EST (financial fitness calculator promo)
-    - cron: "0 17 * * *"
-    # Post 3 — 6:00 PM EST (AI-generated finance content)
-    - cron: "0 23 * * *"
+    # Post 1 — 8:00 AM IST (pre-written finance insight) = 2:30 AM UTC
+    - cron: "30 2 * * *"
+    # Post 2 — 12:00 PM IST (financial fitness calculator promo) = 6:30 AM UTC
+    - cron: "30 6 * * *"
+    # Post 3 — 6:00 PM IST (AI-generated finance content) = 12:30 PM UTC
+    - cron: "30 12 * * *"
   workflow_dispatch:  # Allows manual trigger from GitHub UI for testing
     inputs:
       post_type:
