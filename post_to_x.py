@@ -19,7 +19,7 @@ x_client = tweepy.Client(
 )
 
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-gemini = genai.GenerativeModel("gemini-1.5-pro")
+gemini = genai.GenerativeModel("gemini-1.5-flash")
 
 # ── Post Generators ───────────────────────────────────────────────────────────
 
