@@ -1,13 +1,13 @@
 """
 X Finance Bot
-Posts 2x daily: 8 AM EST (pre-written) and 6 PM EST (AI-generated)
+Posts 3x daily: 8 AM IST (pre-written), 12 PM IST (calculator promo), 6 PM IST (AI-generated)
 """
 
 import os
 import json
 import sys
 import tweepy
-import google.generativeai as genai
+from groq import Groq
 from datetime import datetime
 
 # ── Credentials (set as GitHub Secrets) ──────────────────────────────────────
@@ -18,8 +18,7 @@ x_client = tweepy.Client(
     access_token_secret=os.environ["X_ACCESS_TOKEN_SECRET"],
 )
 
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-gemini = genai.GenerativeModel("gemini-2.0-flash")
+groq_client = Groq(api_key=os.environ["GROQ_API_KEY"])
 
 # ── Post Generators ───────────────────────────────────────────────────────────
 
@@ -33,65 +32,69 @@ def get_scheduled_post() -> str:
     return post["text"]
 
 
+def ask_groq(prompt: str) -> str:
+    """Send a prompt to Groq and return the response text."""
+    response = groq_client.chat.completions.create(
+        model="llama3-8b-8192",
+        max_tokens=200,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return response.choices[0].message.content.strip()
+
+
 def get_ai_post() -> str:
-    """Generate a fresh finance post using Gemini."""
+    """Generate a fresh finance post using Groq."""
     topics = [
-        "budgeting and saving habits",
-        "stock market investing principles",
-        "wealth-building mindset",
-        "passive income strategies",
-        "personal finance mistakes to avoid",
-        "compound interest and long-term thinking",
-        "financial independence / FIRE movement",
+        "budgeting and saving habits for salaried Indians",
+        "stock market and mutual fund investing principles",
+        "wealth-building mindset for Indian millennials",
+        "passive income strategies relevant to India",
+        "personal finance mistakes Indians commonly make",
+        "compound interest and long-term SIP thinking",
+        "financial independence and early retirement in India",
     ]
     topic = topics[datetime.utcnow().weekday()]
 
-    prompt = (
+    return ask_groq(
         f"Write a single X (Twitter) post about: {topic}.\n\n"
         "Rules:\n"
         "- Under 270 characters\n"
         "- Insightful, punchy, or thought-provoking\n"
+        "- Use Indian context: ₹, SIP, FD, EMI, Nifty, CIBIL where relevant\n"
         "- No hashtags\n"
         "- Conversational but authoritative tone\n"
         "- No filler phrases like 'Remember:' or 'Pro tip:'\n"
         "- Return ONLY the post text, nothing else"
     )
-    response = gemini.generate_content(prompt)
-    return response.text.strip()
 
 
 def get_calculator_promo_post() -> str:
     """Generate a daily promo post for the Financial Fitness Calculator."""
     angles = [
-        "most people don't know their actual financial health score",
+        "most Indians don't know their actual financial health score",
         "the gap between feeling financially okay and being financially fit",
-        "the specific metrics that determine financial fitness (savings rate, debt ratio, net worth)",
-        "how quickly your financial situation can change when you measure it",
+        "the specific metrics that determine financial fitness: savings rate, debt ratio, net worth",
+        "how quickly your financial situation can change when you start measuring it",
         "why tracking financial fitness is like tracking physical fitness",
-        "the blind spots people have about their own finances",
+        "the blind spots Indians have about their own finances",
         "how knowing your numbers is the first step to changing them",
     ]
     angle = angles[datetime.utcnow().weekday()]
 
-    CTA_URL = "https://financialfitnesscalculator.com/"
-    CTA_TEXT = "Check your financial fitness →"
-
-    prompt = (
+    return ask_groq(
         f"Write an X (Twitter) post promoting a free Financial Fitness Calculator.\n\n"
         f"Today's angle: {angle}\n\n"
         "The calculator helps people measure their financial health across key metrics "
         "like savings rate, debt-to-income ratio, emergency fund, and net worth.\n\n"
         "Rules:\n"
-        f"- End with this exact CTA on a new line: {CTA_TEXT}\n"
-        f"- Then the URL on its own line: {CTA_URL}\n"
+        "- End with this exact CTA on a new line: Check your financial fitness →\n"
+        "- Then the URL on its own line: https://financialfitnesscalculator.com/\n"
         "- The text before the CTA must be under 200 characters\n"
         "- Hook-driven opening — make people feel the gap or the curiosity\n"
-        "- No hashtags, no emojis unless one fits naturally\n"
-        "- Conversational, not salesy\n"
+        "- Use Indian context where relevant\n"
+        "- No hashtags. Conversational, not salesy.\n"
         "- Return ONLY the post text, nothing else"
     )
-    response = gemini.generate_content(prompt)
-    return response.text.strip()
 
 
 # ── Post to X ─────────────────────────────────────────────────────────────────
@@ -110,7 +113,6 @@ def post_to_x(text: str) -> None:
 # ── Entry Point ───────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    # POST_TYPE options: "scheduled" | "ai" | "calculator"
     post_type = os.environ.get("POST_TYPE", "scheduled")
 
     print(f"🚀 Running X Finance Bot — mode: {post_type}")
