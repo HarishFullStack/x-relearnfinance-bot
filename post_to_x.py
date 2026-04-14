@@ -39,7 +39,9 @@ def ask_groq(prompt: str) -> str:
         max_tokens=200,
         messages=[{"role": "user", "content": prompt}],
     )
-    return response.choices[0].message.content.strip()
+    text = response.choices[0].message.content.strip()
+    text = text.strip('"').strip("'")
+    return text
 
 
 def get_ai_post() -> str:
