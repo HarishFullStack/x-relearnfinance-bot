@@ -35,7 +35,7 @@ def get_scheduled_post() -> str:
 def ask_groq(prompt: str) -> str:
     """Send a prompt to Groq and return the response text."""
     response = groq_client.chat.completions.create(
-        model="llama3-8b-8192",
+        model="llama-3.1-8b-instant",
         max_tokens=200,
         messages=[{"role": "user", "content": prompt}],
     )
