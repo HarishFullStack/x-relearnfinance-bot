@@ -81,20 +81,31 @@ def get_calculator_promo_post() -> str:
     ]
     angle = angles[datetime.utcnow().weekday()]
 
-    return ask_groq(
+    raw = ask_groq(
         f"Write an X (Twitter) post promoting a free Financial Fitness Calculator.\n\n"
         f"Today's angle: {angle}\n\n"
-        "The calculator helps people measure their financial health across key metrics "
-        "like savings rate, debt-to-income ratio, emergency fund, and net worth.\n\n"
+        "The calculator helps Indians measure financial health: savings rate, debt ratio, emergency fund, net worth.\n\n"
         "Rules:\n"
-        "- End with this exact CTA on a new line: Check your financial fitness →\n"
-        "- Then the URL on its own line: https://financialfitnesscalculator.com/\n"
-        "- The text before the CTA must be under 200 characters\n"
-        "- Hook-driven opening — make people feel the gap or the curiosity\n"
-        "- Use Indian context where relevant\n"
+        "- Write ONE short punchy sentence as the hook — 180 characters maximum\n"
+        "- Do NOT write paragraphs, lists, or multiple questions\n"
+        "- After the hook add a blank line then exactly these two lines:\n"
+        "Check your financial fitness →\n"
+        "https://financialfitnesscalculator.com/\n"
         "- No hashtags. Conversational, not salesy.\n"
         "- Return ONLY the post text, nothing else"
     )
+ 
+    # Safety net: ensure CTA is always present even if AI drops it
+    CTA = "\nCheck your financial fitness →\nhttps://financialfitnesscalculator.com/"
+    if "financialfitnesscalculator.com" not in raw:
+        # Strip any partial CTA and re-attach cleanly
+        hook = raw.split("\n")[0][:180].strip()
+        return hook + CTA
+ 
+    # Ensure hook doesn't overflow — trim to first line if too long
+    lines = raw.strip().split("\n")
+    hook = lines[0][:180].strip()
+    return hook + CTA
 
 
 # ── Post to X ─────────────────────────────────────────────────────────────────
