@@ -2,10 +2,13 @@ name: X Finance Bot
 
 on:
   schedule:
-    - cron: "30 2 * * *"  # scheduled
-    - cron: "30 6 * * *"  # calculator
-    - cron: "30 12 * * *"  # ai
-  workflow_dispatch:
+    # Post 1 — 8:00 AM IST (pre-written finance insight) = 2:30 AM UTC
+    - cron: "30 2 * * *"
+    # Post 2 — 12:00 PM IST (financial fitness calculator promo) = 6:30 AM UTC
+    - cron: "30 6 * * *"
+    # Post 3 — 6:00 PM IST (AI-generated finance content) = 12:30 PM UTC
+    - cron: "30 12 * * *"
+  workflow_dispatch:  # Allows manual trigger from GitHub UI for testing
     inputs:
       post_type:
         description: "Post type: 'scheduled', 'calculator', or 'ai'"
@@ -15,28 +18,34 @@ on:
 jobs:
   post:
     runs-on: ubuntu-latest
+
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
       - name: Determine post type
         id: post_type
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "type=${{ github.event.inputs.post_type }}" >> $GITHUB_OUTPUT
           else
-            SCHEDULE="${{ github.event.schedule }}"
-            case "$SCHEDULE" in
-              "30 2 * * *")
-                echo "type=scheduled" >> $GITHUB_OUTPUT
-                ;;
-              "30 6 * * *")
-                echo "type=calculator" >> $GITHUB_OUTPUT
-                ;;
-              "30 12 * * *")
-                echo "type=ai" >> $GITHUB_OUTPUT
-                ;;
-              *)
-                echo "type=ai" >> $GITHUB_OUTPUT
-                ;;
-            esac
+            HOUR=$(date -u +"%H")
+            MIN=$(date -u +"%M")
+            if [ "$HOUR$MIN" = "0230" ]; then
+              echo "type=scheduled" >> $GITHUB_OUTPUT
+            elif [ "$HOUR$MIN" = "0630" ]; then
+              echo "type=calculator" >> $GITHUB_OUTPUT
+            else
+              echo "type=ai" >> $GITHUB_OUTPUT
+            fi
           fi
 
       - name: Run bot
