@@ -58,14 +58,16 @@ def get_ai_post() -> str:
     topic = topics[datetime.utcnow().weekday()]
 
     return ask_groq(
-        f"Write a single X (Twitter) post about: {topic}.\n\n"
+        f"Write a short X (Twitter) post about: {topic}.\n\n"
+        "Format:\n"
+        "- Line 1: A short relatable observation or hook (max 80 chars)\n"
+        "- Line 2: blank\n"
+        "- Line 3-4: The insight or advice in 1-2 short lines\n\n"
         "Rules:\n"
-        "- Under 270 characters\n"
-        "- Insightful, punchy, or thought-provoking\n"
+        "- Total post must be under 260 characters including line breaks\n"
+        "- Sound like a real person sharing genuine advice, not a corporate account\n"
         "- Use Indian context: ₹, SIP, FD, EMI, Nifty, CIBIL where relevant\n"
-        "- No hashtags\n"
-        "- Conversational but authoritative tone\n"
-        "- No filler phrases like 'Remember:' or 'Pro tip:'\n"
+        "- No hashtags, no emojis, no filler like 'Remember:' or 'Pro tip:'\n"
         "- Return ONLY the post text, nothing else"
     )
 
@@ -87,40 +89,54 @@ def get_calculator_promo_post() -> str:
         f"Write an X (Twitter) post promoting a free Financial Fitness Calculator.\n\n"
         f"Today's angle: {angle}\n\n"
         "The calculator helps Indians measure financial health: savings rate, debt ratio, emergency fund, net worth.\n\n"
+        "Format:\n"
+        "- Line 1: A short relatable hook (max 80 chars)\n"
+        "- Line 2: blank\n"
+        "- Line 3: One line expanding on the hook (max 100 chars)\n"
+        "- Line 4: blank\n"
+        "- Line 5: Check your financial fitness →\n"
+        "- Line 6: https://financialfitnesscalculator.com/\n\n"
         "Rules:\n"
-        "- Write ONE short punchy sentence as the hook — 180 characters maximum\n"
-        "- Do NOT write paragraphs, lists, or multiple questions\n"
-        "- After the hook add a blank line then exactly these two lines:\n"
-        "Check your financial fitness →\n"
-        "https://financialfitnesscalculator.com/\n"
-        "- No hashtags. Conversational, not salesy.\n"
+        "- Total post must be under 280 characters including line breaks\n"
+        "- Sound like a real person, not an ad\n"
+        "- No hashtags, no emojis\n"
         "- Return ONLY the post text, nothing else"
     )
- 
+
     # Safety net: ensure CTA is always present even if AI drops it
     CTA = "\nCheck your financial fitness →\nhttps://financialfitnesscalculator.com/"
     if "financialfitnesscalculator.com" not in raw:
-        # Strip any partial CTA and re-attach cleanly
-        hook = raw.split("\n")[0][:180].strip()
+        lines = [l for l in raw.strip().split("\n") if l.strip()]
+        hook = lines[0][:80].strip()
+        body = lines[1][:100].strip() if len(lines) > 1 else ""
+        return hook + ("\n\n" + body if body else "") + CTA
+
+    # Trim if still too long
+    if len(raw) > 280:
+        lines = raw.strip().split("\n")
+        hook = lines[0][:80].strip()
         return hook + CTA
- 
-    # Ensure hook doesn't overflow — trim to first line if too long
-    lines = raw.strip().split("\n")
-    hook = lines[0][:180].strip()
-    return hook + CTA
+
+    return raw
 
 
 # ── Post to X ─────────────────────────────────────────────────────────────────
 
 def post_to_x(text: str) -> None:
     if len(text) > 280:
-        print(f"⚠️  Post too long ({len(text)} chars), truncating...")
-        text = text[:277] + "..."
+        print(f"⚠️  Post too long ({len(text)} chars), trimming hook...")
+        CTA = "\nCheck your financial fitness →\nhttps://financialfitnesscalculator.com/"
+        if CTA in text:
+            hook = text.replace(CTA, "")
+            allowed = 280 - len(CTA)
+            text = hook[:allowed].strip() + CTA
+        else:
+            text = text[:277] + "..."
 
     response = x_client.create_tweet(text=text)
     tweet_id = response.data["id"]
     print(f"✅ Posted! Tweet ID: {tweet_id}")
-    print(f"📝 Content: {text}")
+    print(f"📝 Content ({len(text)} chars):\n{text}")
 
 
 # ── Entry Point ───────────────────────────────────────────────────────────────
