@@ -20,7 +20,9 @@ jobs:
   morning-post:
     name: Morning Pre-written Post (8AM IST)
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '30 2 * * *')
+    if: |
+      (github.event_name == 'schedule' && github.event.schedule == '30 2 * * *') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.post_type == 'scheduled')
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -39,7 +41,9 @@ jobs:
   calculator-post:
     name: Calculator Promo Post (12PM IST)
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' && github.event.schedule == '30 6 * * *'
+    if: |
+      (github.event_name == 'schedule' && github.event.schedule == '30 6 * * *') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.post_type == 'calculator')
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -58,7 +62,9 @@ jobs:
   evening-post:
     name: Evening AI Post (6PM IST)
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' && github.event.schedule == '30 12 * * *'
+    if: |
+      (github.event_name == 'schedule' && github.event.schedule == '30 12 * * *') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.post_type == 'ai')
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
