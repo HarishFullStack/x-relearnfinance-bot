@@ -36,7 +36,7 @@ def ask_groq(prompt: str) -> str:
     """Send a prompt to Groq and return the response text."""
     response = groq_client.chat.completions.create(
         model="llama-3.1-8b-instant",
-        max_tokens=200,
+        max_tokens=80,
         messages=[{"role": "user", "content": prompt}],
     )
     text = response.choices[0].message.content.strip()
@@ -88,19 +88,17 @@ def get_calculator_promo_post() -> str:
     raw = ask_groq(
         f"Write an X (Twitter) post promoting a free Financial Fitness Calculator.\n\n"
         f"Today's angle: {angle}\n\n"
-        "The calculator helps Indians measure financial health: savings rate, debt ratio, emergency fund, net worth.\n\n"
-        "Format:\n"
-        "- Line 1: A short relatable hook (max 80 chars)\n"
-        "- Line 2: blank\n"
-        "- Line 3: One line expanding on the hook (max 100 chars)\n"
-        "- Line 4: blank\n"
-        "- Line 5: Check your financial fitness →\n"
-        "- Line 6: https://financialfitnesscalculator.com/\n\n"
+        "Format (follow exactly, nothing more):\n"
+        "Line 1: Hook — one sentence, max 60 characters\n"
+        "Line 2: blank\n"
+        "Line 3: One sentence expanding the hook, max 80 characters\n\n"
         "Rules:\n"
-        "- Total post must be under 280 characters including line breaks\n"
-        "- Sound like a real person, not an ad\n"
+        "- Write ONLY lines 1 and 3 — do not add CTA or URL, that is added automatically\n"
+        "- Total of your response must be under 150 characters\n"
+        "- ONE sentence per line only, no lists, no paragraphs\n"
+        "- Sound like a real person noticing something, not an ad\n"
         "- No hashtags, no emojis\n"
-        "- Return ONLY the post text, nothing else"
+        "- Return ONLY the two lines, nothing else"
     )
 
     # Safety net: ensure CTA is always present even if AI drops it
