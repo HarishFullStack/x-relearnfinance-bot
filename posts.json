@@ -1,32 +1,92 @@
 [
-  { "text": "Most people spend more time planning a wedding than planning their finances. A single afternoon with your numbers can change the next decade." },
-  { "text": "The difference between financially free and financially stressed often isn't income. It's what happens to the money after it arrives in your account." },
-  { "text": "Inflation in India has averaged 5–6% a year. Keeping your savings in an FD barely breaks even. Investing is how you actually grow wealth." },
-  { "text": "Your biggest financial asset isn't your portfolio. It's your ability to earn — protect and grow that first." },
-  { "text": "Automating your SIP means you never have to rely on willpower. Systems beat discipline every time." },
-  { "text": "A personal loan at 14–18% interest while your investments earn 10–12% is a guaranteed negative return. Pay off high-interest debt first." },
-  { "text": "An emergency fund isn't a savings account. It's the insurance that keeps you from breaking your FD or taking a personal loan during a bad month." },
-  { "text": "The Nifty 50 has delivered 13–14% CAGR over the last 20 years. Short-term drops aren't a crisis — they're the price of admission for long-term wealth." },
-  { "text": "You don't need a financial advisor to start investing. A low-cost Nifty or Sensex index fund and the patience to stay invested will do more than most advice." },
-  { "text": "Lifestyle creep is silent. Every hike that becomes a bigger EMI is a SIP contribution you never made." },
-  { "text": "Time in the market beats timing the market. Every. Single. Time. The data from Indian markets is clear. The debate is over." },
-  { "text": "Your net worth is not your worth as a person. But confusing the two will make your financial decisions terrible." },
-  { "text": "Compound interest works the same in reverse. A credit card balance at 36–42% annual interest compounds against you every single day." },
-  { "text": "A ₹10,000 SIP started at 25 can create over ₹3.5 crore by retirement. The same SIP started at 35 creates less than ₹1 crore. Start early." },
-  { "text": "The best investment you can make is in skills that increase your income. No market volatility. No expense ratio. The returns are yours to keep." },
-  { "text": "Diversification isn't just equity vs debt. It's income streams, skills, and asset classes. Think wider than just mutual funds." },
-  { "text": "If your portfolio makes you anxious every time you check it, you're either overexposed to risk or checking it too often. Both are fixable." },
-  { "text": "Most financial mistakes aren't about maths. They're about emotion — fear, greed, impatience. Master your psychology first." },
-  { "text": "The 50/30/20 rule is a starting point, not a law. What matters is that every rupee has a job before it arrives in your account." },
-  { "text": "Pay yourself first — set up your SIP and RD before spending on anything else. Your bills will force creativity. Your investments won't." },
-  { "text": "A single income stream is a single point of failure. You don't need seven today, but you should be working toward more than one." },
-  { "text": "Every luxury you normalise becomes a necessity. Every unnecessary expense you cut becomes financial freedom, one month at a time." },
-  { "text": "A monthly SIP removes the biggest obstacle to investing: the fear of entering the market at the wrong time." },
-  { "text": "A good CIBIL score doesn't mean you're good with money. It means lenders trust you with their money. Know the difference." },
-  { "text": "The Indian stock market is the only place where people panic when stocks go on sale and rush in when prices are at all-time highs." },
-  { "text": "Being frugal isn't about being cheap. It's about being intentional with what you trade your time for." },
-  { "text": "If your employer offers a PF contribution, not maximising it is voluntarily leaving part of your salary on the table. Don't leave free money behind." },
-  { "text": "The goal isn't to get rich quickly. The goal is to never be financially desperate. That's a different, more achievable target." },
-  { "text": "Money problems are usually spending problems in disguise. Track your expenses for 30 days before you blame your salary." },
-  { "text": "Financial freedom isn't a number. It's the point where your investments generate enough to fund your lifestyle without you working. Build toward that." }
+  {
+    "text": "Indians spend months planning a wedding.\nMost spend zero time planning what happens after.\n\nOne afternoon reviewing your numbers can do more for your next decade than any ceremony."
+  },
+  {
+    "text": "Two people. Same salary. One stressed, one free.\n\nThe difference isn't how much they earn.\nIt's what they do in the 10 minutes after salary hits their account."
+  },
+  {
+    "text": "Inflation in India runs at 5–6% a year.\nFD rates hover around 6–7%.\n\nYou're not growing wealth — you're barely standing still. Investing isn't optional. It's the only way to actually move forward."
+  },
+  {
+    "text": "Your biggest financial asset isn't your mutual fund.\n\nIt's your ability to earn ₹X every month for the next 30 years.\n\nProtect it. Insure it. Grow it. Everything else comes after."
+  },
+  {
+    "text": "I've missed zero SIP payments in 3 years.\n\nNot because I'm disciplined.\nBecause I automated it on salary day and made the decision once.\n\nSystems beat willpower every time."
+  },
+  {
+    "text": "Taking a personal loan at 16% interest while your mutual funds earn 12% is a guaranteed loss.\n\nYou're borrowing at a higher rate than you're earning.\nPay off high-interest debt first. Always."
+  },
+  {
+    "text": "An emergency fund isn't a savings goal.\n\nIt's the thing that stops you from breaking your SIP, taking a personal loan, or calling relatives when life goes wrong.\n\n3–6 months of expenses. Non-negotiable."
+  },
+  {
+    "text": "Nifty 50: 13–14% CAGR over 20 years.\n\nEvery crash in that period looked catastrophic in the moment.\nEvery one recovered.\n\nShort-term drops aren't a crisis. They're the fee you pay for long-term wealth."
+  },
+  {
+    "text": "You don't need a financial advisor to start investing.\n\nA Nifty index fund + a standing SIP instruction + the patience to ignore market news = better results than most managed portfolios.\n\nSimple wins."
+  },
+  {
+    "text": "Got a ₹15,000 hike?\n\nMost people upgrade their phone, move to a bigger flat, or add an EMI.\n\nThat hike quietly became a liability.\nEvery upgrade you normalize is a SIP you never started."
+  },
+  {
+    "text": "\"Wait for the market to correct before investing.\"\n\nSaid every year. By people who never invested.\n\nNifty data is 30 years old and the answer is clear: time in the market beats timing the market."
+  },
+  {
+    "text": "Your net worth does not define your value as a person.\n\nBut if you subconsciously believe it does — you'll make financial decisions driven by ego, not logic.\n\nSeparate the two. It'll save you lakhs."
+  },
+  {
+    "text": "Compound interest is beautiful in a SIP.\n\nIn a credit card balance, it's a nightmare.\n\nAt 36–42% annual interest, ₹50,000 unpaid becomes ₹70,000 in a year.\nThe math works the same in both directions."
+  },
+  {
+    "text": "₹10,000 SIP started at 25 → ₹3.5 crore at 60.\n₹10,000 SIP started at 35 → ₹95 lakh at 60.\n\nSame money. Same fund.\n10 years difference = ₹2.5 crore difference.\n\nStart. Today."
+  },
+  {
+    "text": "The highest-returning investment I've made wasn't in the stock market.\n\nIt was a ₹4,000 course that doubled my earning ability.\n\nNo volatility. No expense ratio. The returns compound every month."
+  },
+  {
+    "text": "Diversification isn't just \"some equity, some debt.\"\n\nIt's multiple income streams.\nIt's skills that pay you in any market.\nIt's assets across categories.\n\nThink wider than your mutual fund app."
+  },
+  {
+    "text": "If you check your portfolio every day, one of two things is wrong:\n\n1. You're overexposed to risk\n2. You're addicted to the anxiety\n\nBoth are fixable. One requires rebalancing. The other requires honesty."
+  },
+  {
+    "text": "The math of investing is simple.\nIt's the psychology that ruins you.\n\nBuying high because everyone's excited.\nSelling low because everything feels scary.\n\nMaster your emotions first. Everything else is details."
+  },
+  {
+    "text": "The 50/30/20 rule is a decent starting point.\n\nBut the real rule is simpler:\n\nEvery rupee needs a job before it arrives in your account.\nUnemployed money disappears. Always."
+  },
+  {
+    "text": "Set up your SIP on salary day — before rent, before groceries, before anything.\n\nYour bills will force you to be creative with what's left.\nYour investments won't.\n\nPay yourself first."
+  },
+  {
+    "text": "One income stream = one point of failure.\n\nYou don't need 7 sources today.\nBut if your salary stops tomorrow, what happens?\n\nStart building a second. Freelance, content, consulting — anything."
+  },
+  {
+    "text": "The subscription you forgot about.\nThe food delivery habit.\nThe \"just this month\" EMI.\n\nEvery luxury you normalize becomes a necessity.\nEvery unnecessary expense you cut is one month closer to freedom."
+  },
+  {
+    "text": "\"Should I invest now or wait for the market to fall?\"\n\nA SIP removes this question entirely.\n\nYou invest every month regardless — buying more units when markets fall, fewer when they rise.\nFear is no longer a factor."
+  },
+  {
+    "text": "A good CIBIL score means banks trust you with their money.\n\nIt doesn't mean you're good with yours.\n\nTwo very different things. One makes you look responsible. The other actually makes you wealthy."
+  },
+  {
+    "text": "The Indian stock market:\n\n→ Panics when stocks drop 10% and go \"on sale\"\n→ Rushes in when indices hit all-time highs\n\nRetail investors do this every single cycle.\nThe wealthy do the opposite."
+  },
+  {
+    "text": "Frugal doesn't mean cheap.\n\nIt means you've calculated what your time is worth and you refuse to trade it for things that don't matter.\n\nThat's not restriction. That's clarity."
+  },
+  {
+    "text": "If your employer matches PF contributions and you're not maximising it — you are declining part of your salary.\n\nNo negotiation required. No market risk.\nFree money. Most Indians ignore it completely."
+  },
+  {
+    "text": "Stop trying to get rich quick.\n\nAim for something harder and more valuable:\n\nNever being financially desperate.\n\nNo panic during medical bills. No bad loans. No calling relatives.\nThat's the real target."
+  },
+  {
+    "text": "Before blaming your salary, track every expense for 30 days.\n\nMost \"income problems\" turn into spending problems by day 15.\n\nThe salary isn't the issue. The invisible leaks are."
+  },
+  {
+    "text": "Financial freedom isn't a crore figure in your head.\n\nIt's the day your investments generate enough to cover your lifestyle — without you working.\n\nThat number is personal. Start calculating yours."
+  }
 ]
