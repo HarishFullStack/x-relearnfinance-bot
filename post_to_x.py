@@ -43,34 +43,30 @@ def ask_groq(prompt: str) -> str:
     text = text.strip('"').strip("'")
     return text
 
-
 def get_ai_post() -> str:
-    """Generate a fresh finance post using Groq."""
-    topics = [
-        "budgeting and saving habits for salaried Indians",
-        "stock market and mutual fund investing principles",
-        "wealth-building mindset for Indian millennials",
-        "passive income strategies relevant to India",
-        "personal finance mistakes Indians commonly make",
-        "compound interest and long-term SIP thinking",
-        "financial independence and early retirement in India",
-    ]
-    topic = topics[datetime.utcnow().weekday()]
-
+    """Generate a trend-aware finance post using Groq."""
     return ask_groq(
-        f"Write a short X (Twitter) post about: {topic}.\n\n"
+        "You are a personal finance content creator for salaried Indians aged 22–40.\n\n"
+        "Step 1 — Think about what is trending or being widely discussed in India RIGHT NOW:\n"
+        "Consider recent news, market events, RBI/SEBI decisions, Budget updates, IPO activity,\n"
+        "viral social media topics, cricket, Bollywood, jobs/layoffs, or any cultural moment\n"
+        "that Indians are actively talking about on X (Twitter) today.\n\n"
+        "Step 2 — Pick the ONE trending topic that can be most naturally connected\n"
+        "to a personal finance lesson. If nothing connects cleanly, use a strong\n"
+        "evergreen Indian finance angle instead.\n\n"
+        "Step 3 — Write the X (Twitter) post.\n\n"
         "Format:\n"
-        "- Line 1: A short relatable observation or hook (max 80 chars)\n"
+        "- Line 1: Hook that ties the trend to a money truth (max 85 chars)\n"
         "- Line 2: blank\n"
-        "- Line 3-4: The insight or advice in 1-2 short lines\n\n"
+        "- Lines 3–4: The finance insight in 1–2 punchy lines\n\n"
         "Rules:\n"
         "- Total post must be under 260 characters including line breaks\n"
-        "- Sound like a real person sharing genuine advice, not a corporate account\n"
-        "- Use Indian context: ₹, SIP, FD, EMI, Nifty, CIBIL where relevant\n"
+        "- Sound like a real person, not a brand account\n"
+        "- Use Indian context: ₹, SIP, EMI, FD, Nifty, CIBIL where relevant\n"
         "- No hashtags, no emojis, no filler like 'Remember:' or 'Pro tip:'\n"
-        "- Return ONLY the post text, nothing else"
+        "- Do NOT mention the trend awkwardly — weave it in naturally\n"
+        "- Return ONLY the final post text, nothing else"
     )
-
 
 def get_calculator_promo_post() -> str:
     """Generate a daily promo post for the Financial Fitness Calculator."""
