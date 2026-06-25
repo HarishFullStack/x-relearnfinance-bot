@@ -32,16 +32,14 @@ def get_scheduled_post() -> str:
     return post["text"]
 
 
-def ask_groq(prompt: str) -> str:
-    """Send a prompt to Groq and return the response text."""
-    response = groq_client.chat.completions.create(
-        model="llama-3.1-8b-instant",
-        max_tokens=80,
+def ask_groq(prompt: str, max_tokens: int = 300) -> str:
+    response = client.chat.completions.create(
+        model="llama3-8b-8192",
         messages=[{"role": "user", "content": prompt}],
+        max_tokens=max_tokens,   # ← make sure this is wired up
+        temperature=0.8,
     )
-    text = response.choices[0].message.content.strip()
-    text = text.strip('"').strip("'")
-    return text
+    return response.choices[0].message.content.strip()
 
 def get_ai_post() -> str:
     """Generate a trend-aware finance post using Groq."""
@@ -58,14 +56,18 @@ def get_ai_post() -> str:
         "Format:\n"
         "- Line 1: Hook that ties the trend to a money truth (max 85 chars)\n"
         "- Line 2: blank\n"
-        "- Lines 3–4: The finance insight in 1–2 punchy lines\n\n"
+        "- Lines 3–4: The finance insight in 1–2 punchy lines\n"
+        "- Line 5: blank\n"
+        "- Line 6: One punchy closing line that reinforces the lesson (max 60 chars)\n\n"
         "Rules:\n"
-        "- Total post must be under 260 characters including line breaks\n"
+        "- Total post must be BETWEEN 220 and 260 characters including line breaks\n"
+        "- You MUST write all 6 lines — do not stop early\n"
         "- Sound like a real person, not a brand account\n"
         "- Use Indian context: ₹, SIP, EMI, FD, Nifty, CIBIL where relevant\n"
         "- No hashtags, no emojis, no filler like 'Remember:' or 'Pro tip:'\n"
         "- Do NOT mention the trend awkwardly — weave it in naturally\n"
-        "- Return ONLY the final post text, nothing else"
+        "- Return ONLY the final post text, nothing else",
+        max_tokens=300
     )
 
 def get_calculator_promo_post() -> str:
