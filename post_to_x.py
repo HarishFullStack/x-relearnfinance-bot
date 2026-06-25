@@ -33,7 +33,7 @@ def get_scheduled_post() -> str:
 
 
 def ask_groq(prompt: str, max_tokens: int = 300) -> str:
-    response = client.chat.completions.create(
+    response = groq_client.chat.completions.create(
         model="llama3-8b-8192",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=max_tokens,   # ← make sure this is wired up
