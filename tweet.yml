@@ -7,7 +7,7 @@ on:
     # Post 2 — 12:00 PM IST = 6:30 AM UTC
     - cron: "30 6 * * *"
     # Post 3 — 6:00 PM IST = 12:30 PM UTC
-    - cron: "30 12 * * *"
+    # - cron: "30 12 * * *"
   workflow_dispatch:
     inputs:
       post_type:
