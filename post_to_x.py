@@ -144,7 +144,7 @@ if __name__ == "__main__":
 
     if post_type == "scheduled":
         content = get_scheduled_post()
-    elif post_type == "ai" && AI_POST_ENABLED:
+    elif post_type == "ai" and AI_POST_ENABLED:
         content = get_ai_post()
     elif post_type == "calculator":
         content = get_calculator_promo_post()
