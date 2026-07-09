@@ -136,7 +136,7 @@ def post_to_x(text: str) -> None:
 
 
 # ── Entry Point ───────────────────────────────────────────────────────────────
-
+AI_POST_ENABLED = False
 if __name__ == "__main__":
     post_type = os.environ.get("POST_TYPE", "scheduled")
 
@@ -144,7 +144,7 @@ if __name__ == "__main__":
 
     if post_type == "scheduled":
         content = get_scheduled_post()
-    elif post_type == "ai":
+    elif post_type == "ai" && AI_POST_ENABLED:
         content = get_ai_post()
     elif post_type == "calculator":
         content = get_calculator_promo_post()
